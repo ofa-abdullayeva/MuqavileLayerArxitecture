@@ -1,0 +1,128 @@
+﻿@model List<Entities.DTOs.OrganizationDTOs.OrganizationGetDto>
+@{
+    var query = Context.Request.Query;
+    ViewData["Title"] = "Təşkilatlar";
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+<style>
+    .table td, .table th {
+        vertical-align: middle;
+        word-wrap: break-word;
+        word-break: break-word;
+        max-width: 200px;
+        white-space: normal;
+        border: 1px solid #dee2e6;
+        padding: 0.75rem;
+        text-align: center;
+    }
+ /*    .table td, .table th {
+        vertical-align: middle;
+        word-break: break-word;
+        white-space: normal;
+        padding: 0.75rem;
+        text-align: center;
+        border: 1px solid #dee2e6;
+    } */
+
+    /* Parent div ilə ekrana görə uyğunlaşma */
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+
+ /*    .table-responsive {
+        min-height: 400px;
+        max-height: calc(100vh - 300px);
+    } */
+
+
+
+</style>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-dark fw-semibold mb-0">Təşkilatlar</h2>
+    <a href="/Organization/Add" class="btn btn-primary" style="background-color: #2e3c60; border-color: #2e3c60;">
+        <i class="bi bi-plus-circle"></i> Yeni Təşkilat
+    </a>
+</div>
+
+<form method="get" class="row g-2 align-items-center mb-4">
+    <div class="col-md-4">
+        <input type="text" name="searchName" class="form-control rounded shadow-sm" placeholder="🔍 Təşkilat adı ilə axtar..." value="@Context.Request.Query["searchName"]" />
+    </div>
+    <div class="col-md-4">
+        <input type="text" name="searchVoen" class="form-control rounded shadow-sm" placeholder="📄 VÖEN ilə axtar..." value="@Context.Request.Query["searchVoen"]" />
+    </div>
+    <div class="col-md-4 d-flex gap-2">
+        <button type="submit" class="btn btn-outline-primary">
+            <i class="bi bi-search"></i> Axtar
+        </button>
+        <a href="/Organization" class="btn btn-outline-secondary">Sıfırla</a>
+    </div>
+</form>
+
+<div class="table-responsive" style="height: calc(100vh - 200px); overflow-y: auto;">
+    <table class="table table-hover table-bordered w-100 mb-0">
+        <thead class="text-white" style="background-color: #2e3c60;">
+            <tr>
+                <th>Ad</th>
+                <th>VÖEN</th>
+                <th>Müqavilə ili</th>
+                <th>Ölkə</th>
+                <th>Şəhər</th>
+                <th>Ünvan</th>
+                <th>Əməliyyat</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.OrganizationName</td>
+                    <td>@item.TaxNumber</td>
+                    <td>@item.ContractYear</td>
+                    <td>@item.Country</td>
+                    <td>@item.City</td>
+                    <td>@item.StreetAptNo</td>
+                    <td>
+                        <div class="d-flex flex-column gap-2">
+                            <a href="/Organization/Details/@item.OrganizationId" class="btn btn-sm btn-outline-primary w-100" title="Ətraflı bax">
+                                <i class="bi bi-eye"></i> Ətraflı
+                            </a>
+                            <a href="/Organization/Edit/@item.OrganizationId" class="btn btn-sm btn-outline-secondary w-100" title="Redaktə et">
+                                <i class="bi bi-pencil"></i> Redaktə
+                            </a>
+                            <a href="/Organization/Delete/@item.OrganizationId" class="btn btn-sm btn-outline-danger w-100" title="Sil">
+                                <i class="bi bi-trash3"></i> Sil
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Alert mesajlarını avtomatik bağla
+    setTimeout(() => {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+            bsAlert.close();
+        });
+    }, 4000);
+</script>

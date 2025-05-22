@@ -1,0 +1,162 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Müqavilə İdarəetmə Proqramı - Əsas Səhifə</title>
+
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .infobox-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .infobox-section h1 {
+            font-size: 2.5rem;
+            color: #38466B;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .infobox-section p {
+            font-size: 1rem;
+            color: #6b6b82;
+            margin-bottom: 30px;
+        }
+
+        .infobox-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .infobox {
+            border-radius: 14px;
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 100%;
+            background-color: #e8edfa;
+            box-shadow: 0 6px 15px rgba(44, 62, 80, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .infobox:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(56, 70, 107, 0.3);
+            cursor: pointer;
+        }
+
+        .infobox .icon {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #38466B;
+        }
+
+        .infobox h2 {
+            font-size: 1.4rem;
+            color: #1a1a40;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .infobox p {
+            font-size: 0.95rem;
+            color: #4a4a66;
+            line-height: 1.6;
+        }
+
+        /* Specific background colors */
+        .bg-entry { background-color: #e6ebf5; }
+        .bg-search { background-color: #f0f2f7; }
+        .bg-reports { background-color: #e7f5ed; }
+        .bg-org { background-color: #dfe4ef; }
+        .bg-extend { background-color: #f9eaea; }
+        .bg-docs { background-color: #f4f6fa; }
+
+    
+    </style>
+</head>
+<body>
+
+<section class="infobox-section">
+    <h1>Rəqəmsal Müqavilə İdarəetmə Platforması</h1>
+
+    <div class="infobox-container">
+
+        <!-- Müqavilələrin Daxil Edilməsi -->
+        <a asp-controller="ContractsView" asp-action="Create" class="infobox bg-entry">
+            <div class="icon"><i class="fa-solid fa-file-circle-plus"></i></div>
+            <h2>Müqavilələrin Daxil Edilməsi</h2>
+            <p>Müqavilə məlumatlarını və sənədləri sistemə əlavə etmək imkanı.</p>
+        </a>
+
+        <!-- Axtarış və Baxış -->
+        <a asp-controller="ContractView" asp-action="Index" class="infobox bg-search">
+            <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <h2>Axtarış və Baxış</h2>
+            <p>Çoxsaylı filtr və meyarlarla müqavilələri asanlıqla tapın və izləyin.</p>
+        </a>
+
+        <!-- Hesabatlar -->
+        <a asp-controller="ReportView" asp-action="Index" class="infobox bg-reports">
+            <div class="icon"><i class="fa-solid fa-chart-column"></i></div>
+            <h2>Hesabatlar</h2>
+            <p>İllik, ümumi və kateqoriya üzrə maliyyə hesabatlarını əldə edin.</p>
+        </a>
+
+        <!-- Təşkilat Məlumatları -->
+        <a asp-controller="OrganizationView" asp-action="Index" class="infobox bg-org">
+            <div class="icon"><i class="fa-solid fa-building"></i></div>
+            <h2>Təşkilat Məlumatları</h2>
+            <p>Təşkilatları idarə edin və əlaqədar müqavilələri izləyin.</p>
+        </a>
+
+        <!-- Müddət Uzadılması -->
+        <a asp-controller="ExtensionView" asp-action="Index" class="infobox bg-extend">
+            <div class="icon"><i class="fa-solid fa-clock"></i></div>
+            <h2>Müddət Uzadılması</h2>
+            <p>Müqavilələrin müddətini sənədlərlə birlikdə uzadın və qeyd edin.</p>
+        </a>
+
+        <!-- Əlavə Sənədlər -->
+        <a asp-controller="DocumentView" asp-action="Index" class="infobox bg-docs">
+            <div class="icon"><i class="fa-solid fa-paperclip"></i></div>
+            <h2>Əlavə Sənədlər</h2>
+            <p>PDF və Word sənədləri əlavə edin və proqram daxilində baxın.</p>
+        </a>
+
+            <!-- Ödəniş Qaimələri üzrə Axtarış -->
+            <a asp-controller="InvoiceView" asp-action="Index" class="infobox bg-search">
+                <div class="icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                <h2>Ödəniş Qaimələri üzrə Axtarış</h2>
+                <p>Qaimə nömrəsinə və tarixə görə ödəniş qaimələrini axtarın və izləyin.</p>
+            </a>
+
+
+    </div>
+
+    <p class="mt-4">@ViewBag.Test</p>
+    <p>İstifadəçi: <strong>@ViewBag.UserName</strong></p>
+</section>
+
+</body>
+</html>

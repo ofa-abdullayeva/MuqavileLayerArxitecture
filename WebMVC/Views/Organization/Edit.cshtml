@@ -1,0 +1,33 @@
+﻿@model Entities.DTOs.OrganizationDTOs.OrganizationUpdateDto
+
+<h2>Təşkilatın Redaktəsi</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="OrganizationId" />
+    <div class="mb-3">
+        <label asp-for="OrganizationName"></label>
+        <input asp-for="OrganizationName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="TaxNumber"></label>
+        <input asp-for="TaxNumber" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ContractYear"></label>
+        <input asp-for="ContractYear" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Country"></label>
+        <input asp-for="Country" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="City"></label>
+        <input asp-for="City" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="StreetAptNo"></label>
+        <input asp-for="StreetAptNo" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Yadda saxla</button>
+    <a href="/Organization" class="btn btn-secondary">Geri</a>
+</form>

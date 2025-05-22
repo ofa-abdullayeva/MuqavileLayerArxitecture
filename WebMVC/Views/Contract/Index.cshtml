@@ -1,0 +1,227 @@
+﻿@model List<Entities.DTOs.ContractDTOs.ContractListDto>
+
+@{
+    ViewData["Title"] = "Müqavilə Siyahısı";
+    var query = Context.Request.Query;
+}
+<style>
+        .table td, .table th {
+        vertical-align: middle;
+        word-wrap: break-word;
+        word-break: break-word;
+        max-width: 200px;
+        white-space: normal;
+        border: 1px solid #dee2e6;
+        padding: 0.75rem;
+        text-align: center;
+    }
+</style>
+<form method="get" class="row g-3 mb-4">
+
+    <!-- Müqavilə ili -->
+    <div class="col-md-4">
+        <input type="text" name="contractYear" class="form-control" placeholder="Müqavilə ili" value="@Context.Request.Query["contractYear"]" />
+    </div>
+
+    <!-- Təşkilat (2-ci və 3-cü sütunu əhatə edir) -->
+    <div class="col-md-8">
+        <select name="organizationId" class="form-select">
+            <option value="">-- Təşkilat seçin --</option>
+            @foreach (var item in ViewBag.Organizations as List<SelectListItem>)
+            {
+                <option value="@item.Value" selected="@(Context.Request.Query["organizationId"] == item.Value ? "selected" : null)">
+                    @item.Text
+                </option>
+            }
+        </select>
+    </div>
+
+    <!-- Müqavilə nömrəsi -->
+    <div class="col-md-4">
+        <input type="text" name="contractNumber" class="form-control" placeholder="Müqavilə №" value="@Context.Request.Query["contractNumber"]" />
+    </div>
+
+    <!-- Kateqoriya -->
+    <div class="col-md-4">
+        <select name="categoryId" class="form-select">
+            <option value="">-- Kateqoriya --</option>
+            @foreach (var item in ViewBag.Categories as List<SelectListItem>)
+            {
+                <option value="@item.Value" selected="@(Context.Request.Query["categoryId"] == item.Value ? "selected" : null)">
+                    @item.Text
+                </option>
+            }
+        </select>
+    </div>
+
+    <!-- Status (3-cü sütunun 2-ci yeri) -->
+    <div class="col-md-4">
+        <select name="contractStatusId" class="form-select">
+            <option value="">-- Status --</option>
+            @foreach (var item in ViewBag.ContractStatuses as List<SelectListItem>)
+            {
+                <option value="@item.Value" selected="@(Context.Request.Query["contractStatusId"] == item.Value ? "selected" : null)">
+                    @item.Text
+                </option>
+            }
+        </select>
+    </div>
+
+    <!-- VÖEN -->
+    <div class="col-md-4">
+        <input type="text" name="taxNumber" class="form-control" placeholder="VÖEN" value="@Context.Request.Query["taxNumber"]" />
+    </div>
+
+    <!-- Alt kateqoriya -->
+    <div class="col-md-4">
+        <select name="categoryTypeId" class="form-select">
+            <option value="">-- Alt kateqoriya --</option>
+            @foreach (var item in ViewBag.CategoryTypes as List<SelectListItem>)
+            {
+                <option value="@item.Value" selected="@(Context.Request.Query["categoryTypeId"] == item.Value ? "selected" : null)">
+                    @item.Text
+                </option>
+            }
+        </select>
+    </div>
+
+    <!-- Ödəniş növü -->
+    <div class="col-md-4">
+        <select name="paymentMethodId" class="form-select">
+            <option value="">-- Ödəniş növü --</option>
+            @foreach (var item in ViewBag.PaymentMethods as List<SelectListItem>)
+            {
+                <option value="@item.Value" selected="@(Context.Request.Query["paymentMethodId"] == item.Value ? "selected" : null)">
+                    @item.Text
+                </option>
+            }
+        </select>
+    </div>
+
+    <!-- Minimum məbləğ -->
+    <div class="col-md-4">
+        <input type="number" name="amountMin" class="form-control" step="0.01" placeholder="Min məbləğ" value="@Context.Request.Query["amountMin"]" />
+    </div>
+
+    <!-- Maksimum məbləğ -->
+    <div class="col-md-4">
+        <input type="number" name="amountMax" class="form-control" step="0.01" placeholder="Max məbləğ" value="@Context.Request.Query["amountMax"]" />
+    </div>
+
+    <!-- Valyuta növü -->
+    <div class="col-md-4">
+        <select name="amountTypeId" class="form-select">
+            <option value="">-- Valyuta seçin --</option>
+            @foreach (var item in ViewBag.AmountTypes as List<SelectListItem>)
+            {
+                <option value="@item.Value" selected="@(Context.Request.Query["amountTypeId"] == item.Value ? "selected" : null)">
+                    @item.Text
+                </option>
+            }
+        </select>
+    </div>
+
+    <!-- Predmet (1-ci sütunun 5-ci sətirini və 2-ci sütunun 5-ci sətirini əhatə edir, yəni 8 sütunu tutur) -->
+    <div class="col-md-8">
+        <input type="text" name="subject" class="form-control" placeholder="Predmet" value="@Context.Request.Query["subject"]" />
+    </div>
+
+    <!-- İcra təminatı -->
+    <div class="col-md-4">
+        <select name="guaranteeId" class="form-select">
+            <option value="">-- İcra təminatı --</option>
+            @foreach (var item in ViewBag.Guarantees as List<SelectListItem>)
+            {
+                <option value="@item.Value" selected="@(Context.Request.Query["guaranteeId"] == item.Value ? "selected" : null)">
+                    @item.Text
+                </option>
+            }
+        </select>
+    </div>
+
+    <!-- Axtar / Sıfırla düymələri -->
+    <div class="col-md-12 d-flex justify-content-end gap-2 mt-2">
+        <button type="submit" class="btn btn-primary">Axtar</button>
+        <a href="/Contract" class="btn btn-secondary">Sıfırla</a>
+    </div>
+
+
+</form>
+
+
+<h2 class="mb-4 text-dark fw-semibold">Müqavilə Siyahısı</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div class="table-responsive border rounded shadow-sm">
+        <table class="table table-hover mb-0">
+            <thead class="text-white" style="background-color: #2e3c60;">
+                <tr>
+                    <th>Müqavilə №</th>
+                    <th>İl</th>
+                    <th>Təşkilat</th>
+                    <th>VÖEN</th>
+                    <th>Predmet</th>
+                    <th>Valyuta</th>
+                    <th>Məbləğ</th>
+                    <th>Ödəniş növü</th>
+                    <th>Başlama tarixi</th>
+                    <th>Bitmə tarixi</th>
+                    <th>Kateqoriya</th>
+                    <th>Kateqoriya növü</th>
+                    <th>Status</th>
+                    <th>İcra Təminatı</th>
+                    <th>Əməliyyat</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ContractNumber</td>
+                        <td>@item.ContractYear</td>
+                        <td>@item.OrganizationName</td>
+                        <td>@item.TaxNumber</td>
+                        <td>@item.Subject</td>
+                        <td>@item.AmountTypeName</td>
+                        <td>@string.Format("{0:N2}", item.Amount)</td>
+                        <td>@item.PaymentMethodName</td>
+                        <td>@item.StartDate?.ToString("dd.MM.yyyy")</td>
+                        <td>@item.EndDate?.ToString("dd.MM.yyyy")</td>
+                        <td>@item.CategoryName</td>
+                        <td>@item.CategoryTypeName</td>
+                        <td>@item.StatusName</td>
+                        <td>@item.GuaranteeName</td>
+                        <td>
+                            <div class="d-flex flex-column gap-2">
+                                <!-- Ətraflı baxış -->
+                                <a href="/Contract/Details/@item.ContractId" class="btn btn-sm btn-outline-primary text-center" title="Ətraflı baxış" style="width: 80px;">
+                                    <i class="bi bi-eye fa-lg mb-1"></i><br />
+                                    Ətraflı
+                                </a>
+
+                                <!-- Redaktə et -->
+                                <a href="/Contract/Edit/@item.ContractId" class="btn btn-sm btn-outline-secondary text-center" title="Redaktə et" style="width: 80px;">
+                                    <i class="bi bi-pencil fa-lg mb-1"></i><br />
+                                    Redaktə
+                                </a>
+
+                                <!-- Sil -->
+                                <a href="/Contract/Delete/@item.ContractId" class="btn btn-sm btn-outline-danger text-center" title="Sil" style="width: 80px;" onclick="return confirm('Müqaviləni silmək istədiyinizə əminsiniz?');">
+                                    <i class="bi bi-trash fa-lg mb-1"></i><br />
+                                    Sil
+                                </a>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-info">Müqavilə tapılmadı və ya sistemdə hələ qeyd olunmayıb.</div>
+}
