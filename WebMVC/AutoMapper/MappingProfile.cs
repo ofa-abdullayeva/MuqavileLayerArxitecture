@@ -23,9 +23,13 @@ namespace WebMVC.AutoMapper
                 .ForMember(dest => dest.Contracts, opt => opt.MapFrom(src => src.Contracts));
 
             CreateMap<Organization, OrganizationUpdateDto>().ReverseMap();
+            CreateMap<OrganizationUpdateDto, Organization>().ReverseMap();
             CreateMap<OrganizationGetDto, OrganizationUpdateDto>().ReverseMap();
             CreateMap<Organization, OrganizationAddDto>().ReverseMap();
-            
+            CreateMap<OrganizationAddDto, Organization>().ReverseMap();
+           
+
+
         }
     }
 }

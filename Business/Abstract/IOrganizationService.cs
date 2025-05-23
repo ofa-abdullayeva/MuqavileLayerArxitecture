@@ -12,10 +12,12 @@ namespace Business.Abstract
     public interface IOrganizationService
     {
         IDataResult<List<OrganizationGetDto>> GetAll();
-        IDataResult<OrganizationGetDto> GetById(int id);
+        IDataResult<Organization> GetById(int id);
         IDataResult<List<OrganizationGetDto>> GetOrganizationDetails();
+        IResult Update(OrganizationUpdateDto dto);
+
         IResult Add(Organization organization);
-        IResult Update(Organization organization); 
+        //IResult Update(Organization organization); 
         IResult Delete(Organization organization); 
 
 

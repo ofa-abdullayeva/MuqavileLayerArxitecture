@@ -13,10 +13,12 @@ namespace Business.Concrate
     public class OrganizationManager : IOrganizationService
     {
         private readonly IOrganizationDal _organizationDal;
+  
 
         public OrganizationManager(IOrganizationDal organizationDal)
         {
             _organizationDal = organizationDal;
+           
         }
 
         public IResult Add(Organization organization)
@@ -32,18 +34,31 @@ namespace Business.Concrate
             }
         }
 
-        public IResult Update(Organization organization)
+        public IResult Update(OrganizationUpdateDto dto)
         {
             try
             {
-                _organizationDal.Update(organization);
-                return new SuccessResult(Messages.OrganizationUpdated);
+                var existing = _organizationDal.Get(o => o.OrganizationId == dto.OrganizationId);
+                if (existing == null)
+                    return new ErrorResult("Təşkilat tapılmadı");
+
+                // DTO-dan gələn məlumatlarla güncəllə
+                existing.OrganizationName = dto.OrganizationName;
+                existing.TaxNumber = dto.TaxNumber;
+                existing.ContractYear = dto.ContractYear;
+                existing.Country = dto.Country;
+                existing.City = dto.City;
+                existing.StreetAptNo = dto.StreetAptNo;
+
+                _organizationDal.Update(existing);
+                return new SuccessResult("Təşkilat yeniləndi.");
             }
             catch (Exception ex)
             {
-                return new ErrorResult("Yenilənmə zamanı xəta baş verdi: " + ex.Message);
+                return new ErrorResult("Xəta baş verdi: " + ex.Message);
             }
         }
+
 
         public IResult Delete(Organization organization)
         {
@@ -58,34 +73,29 @@ namespace Business.Concrate
             }
         }
 
-        public IDataResult<List<OrganizationGetDto>> GetAll()
-        {
-            var data = _organizationDal.GetAll()
-                .Select(o => new OrganizationGetDto
-                {
-                    OrganizationId = o.OrganizationId,
-                    OrganizationName = o.OrganizationName,
-                    TaxNumber = o.TaxNumber
-                }).ToList();
+        //public IDataResult<List<OrganizationGetDto>> GetAll()
+        //{
+        //    var data = _organizationDal.GetAll()
+        //        .Select(o => new OrganizationGetDto
+        //        {
+        //            OrganizationId = o.OrganizationId,
+        //            OrganizationName = o.OrganizationName,
+        //            TaxNumber = o.TaxNumber
+        //        }).ToList();
 
-            return new SuccessDataResult<List<OrganizationGetDto>>(data, Messages.OrganizationListed);
-        }
+        //    return new SuccessDataResult<List<OrganizationGetDto>>(data, Messages.OrganizationListed);
+        //}
+       
 
-        public IDataResult<OrganizationGetDto> GetById(int id)
+        public IDataResult<Organization> GetById(int id)
         {
             var entity = _organizationDal.Get(o => o.OrganizationId == id);
             if (entity == null)
-                return new ErrorDataResult<OrganizationGetDto>("Təşkilat tapılmadı");
+                return new ErrorDataResult<Organization>("Təşkilat tapılmadı");
 
-            var dto = new OrganizationGetDto
-            {
-                OrganizationId = entity.OrganizationId,
-                OrganizationName = entity.OrganizationName,
-                TaxNumber = entity.TaxNumber
-            };
-
-            return new SuccessDataResult<OrganizationGetDto>(dto);
+            return new SuccessDataResult<Organization>(entity);
         }
+
 
         public IDataResult<List<OrganizationGetDto>> GetOrganizationDetails()
         {
@@ -109,5 +119,33 @@ namespace Business.Concrate
 
             return new SuccessDataResult<Organization>(result);
         }
+
+        public IDataResult<List<OrganizationGetDto>> GetAll()
+        {
+            
+                var entities = _organizationDal.GetAll();
+
+                var dtoList = entities.Select(o => new OrganizationGetDto
+                {
+                    OrganizationId = o.OrganizationId,
+                    OrganizationName = o.OrganizationName,
+                    TaxNumber = o.TaxNumber,
+                    ContractYear = o.ContractYear,
+                    Country = o.Country,
+                    City = o.City,
+                    StreetAptNo = o.StreetAptNo,
+                    Contracts = o.Contracts?.Select(c => new ContractMiniDto
+                    {
+                        ContractId = c.ContractId,
+                        ContractNumber = c.ContractNumber,
+                        Amount = c.Amount,
+                        StartDate = c.StartDate
+                    }).ToList()
+                }).ToList();
+
+                return new SuccessDataResult<List<OrganizationGetDto>>(dtoList, "Təşkilatlar siyahılandı.");
+            }
+
+        
     }
 }

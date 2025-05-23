@@ -1,46 +1,32 @@
-﻿@model Entities.Concrate.Organization
-@{
-    ViewData["Title"] = "Yeni Təşkilat Əlavə Et";
-}
+﻿@model Entities.DTOs.OrganizationDTOs.OrganizationAddDto
 
-<h2 class="mb-4 text-dark fw-semibold">Yeni Təşkilat Əlavə Et</h2>
+<h2>Yeni Təşkilat Əlavə Et</h2>
 
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger">@TempData["Error"]</div>
-}
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">@TempData["Success"]</div>
-}
-
-<form asp-action="Add" method="post" class="border p-4 rounded shadow-sm bg-light">
+<form asp-action="Add" method="post">
     <div class="mb-3">
-        <label for="OrganizationName" class="form-label fw-semibold">Təşkilat Adı</label>
-        <input type="text" class="form-control" name="OrganizationName" id="OrganizationName" required />
+        <label asp-for="OrganizationName"></label>
+        <input asp-for="OrganizationName" class="form-control" />
     </div>
-
     <div class="mb-3">
-        <label for="TaxNumber" class="form-label fw-semibold">VÖEN</label>
-        <input type="text" class="form-control" name="TaxNumber" id="TaxNumber" required />
+        <label asp-for="TaxNumber"></label>
+        <input asp-for="TaxNumber" class="form-control" />
     </div>
-
-    <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-success">
-            <i class="bi bi-check-circle me-1"></i> Əlavə et
-        </button>
-        <a href="/Organization" class="btn btn-secondary">
-            <i class="bi bi-arrow-left-circle me-1"></i> Geri
-        </a>
+    <div class="mb-3">
+        <label asp-for="ContractYear"></label>
+        <input asp-for="ContractYear" class="form-control" />
     </div>
+    <div class="mb-3">
+        <label asp-for="Country"></label>
+        <input asp-for="Country" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="City"></label>
+        <input asp-for="City" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="StreetAptNo"></label>
+        <input asp-for="StreetAptNo" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Əlavə et</button>
+    <a href="/Organization" class="btn btn-secondary">Geri</a>
 </form>
-
-<script>
-    setTimeout(() => {
-        const alerts = document.querySelectorAll('.alert');
-        alerts.forEach(alert => {
-            alert.classList.add('fade');
-            setTimeout(() => alert.remove(), 400);
-        });
-    }, 4000);
-</script>

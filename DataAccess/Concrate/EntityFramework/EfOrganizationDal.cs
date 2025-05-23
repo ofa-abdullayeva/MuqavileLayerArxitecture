@@ -29,6 +29,21 @@ namespace DataAccess.Concrate.EntityFramework
             }
         }
 
+        public void Update(Organization entity)
+        {
+            using (var context = new ContractContext())
+            {
+                var existing = context.Organizations.FirstOrDefault(x => x.OrganizationId == entity.OrganizationId);
+                if (existing != null)
+                {
+                    context.Entry(existing).CurrentValues.SetValues(entity);
+                    context.SaveChanges(); // Ən önəmli hissə
+                }
+            }
+        }
+
+
     }
 
 }
+ 
