@@ -22,6 +22,7 @@ namespace Business.Constants
         public static string NoData = "Data yoxdur bazada";
         public static string OrganizationListed = "Bütün təşkilatlar gətirildi";
         public static string OrganizationAdded= "Təşkilat elavə edildi";
+        public static string DeleteResult = "Təşkilat uğurla silindi.";
         internal static string CategoriesListed;
         internal static string GuaranteeListed;
 
