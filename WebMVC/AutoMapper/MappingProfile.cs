@@ -20,6 +20,10 @@ namespace WebMVC.AutoMapper
             CreateMap<ContractFilterDto, Contract>().ReverseMap();
             CreateMap<Contract, ContractMiniDto>();
 
+            CreateMap<ContractDetailsDto, ContractUpdateViewModel>();
+            CreateMap<ContractUpdateViewModel, ContractUpdateDto>();
+
+
             // Organization üçün
             CreateMap<Organization, OrganizationGetDto>()
                 .ForMember(dest => dest.Contracts, opt => opt.MapFrom(src => src.Contracts));

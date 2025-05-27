@@ -196,13 +196,13 @@
                         <td>
                             <div class="d-flex flex-column gap-2">
                                 <!-- Ətraflı baxış -->
-                                <a href="/Contract/Details/@item.ContractId" class="btn btn-sm btn-outline-primary text-center" title="Ətraflı baxış" style="width: 80px;">
+                                <a asp-action="Details" asp-route-id="@item.ContractId"  class="btn btn-sm btn-outline-primary text-center" title="Ətraflı baxış" style="width: 80px;">
                                     <i class="bi bi-eye fa-lg mb-1"></i><br />
                                     Ətraflı
                                 </a>
 
                                 <!-- Redaktə et -->
-                                <a href="/Contract/Edit/@item.ContractId" class="btn btn-sm btn-outline-secondary text-center" title="Redaktə et" style="width: 80px;">
+                                <a asp-action="Edit" asp-route-id="@item.ContractId" class="btn btn-sm btn-outline-secondary text-center" title="Redaktə et" style="width: 80px;">
                                     <i class="bi bi-pencil fa-lg mb-1"></i><br />
                                     Redaktə
                                 </a>

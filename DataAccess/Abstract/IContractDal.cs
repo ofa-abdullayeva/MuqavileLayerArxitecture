@@ -12,6 +12,7 @@ namespace DataAccess.Abstract
     public interface IContractDal : IEntityRepository<Contract>
     {
         List<ContractDetailsDto> GetContractDetails();
+        ContractDetailsDto? GetContractDetailsById(int contractId); // <-- yeni method
 
         List<ContractListDto> GetContractList();
 

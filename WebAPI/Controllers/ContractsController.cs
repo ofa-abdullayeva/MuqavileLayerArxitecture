@@ -40,10 +40,23 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            // Əgər ContractDetailsDto əlavə etmisənsə istifadə edə bilərsən.
-            return Ok(); // implement et
+            var result = _contractService.GetDetailsById(id);
+            if (result.Success && result.Data != null)
+                return Ok(result);
+
+            return NotFound(result.Message ?? "Müqavilə tapılmadı");
         }
 
-        // Əlavə olaraq PUT və DELETE lazım olarsa aşağıda əlavə et.
+
+        [HttpPut]
+        public IActionResult Update([FromBody] ContractUpdateDto dto)
+        {
+            var result = _contractService.Update(dto);
+            if (result.Success)
+                return Ok(result);
+            return BadRequest(result.Message);
+        }
+
+
     }
 }

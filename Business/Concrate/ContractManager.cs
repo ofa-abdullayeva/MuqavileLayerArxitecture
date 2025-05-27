@@ -77,23 +77,24 @@ namespace Business.Concrate
                 ContractYear = x.ContractYear,
                 TaxNumber = x.TaxNumber,
                 OrganizationId = x.OrganizationId,
-                OrganizationName = x.Organization.OrganizationName,
+                OrganizationName = x.Organization != null ? x.Organization.OrganizationName : null,
                 Subject = x.Subject,
                 Amount = x.Amount,
-                AmountTypeId = x.AmountTypeId.Value,
-                AmountTypeName = x.AmountType.AmountTypeName,
-                PaymentMethodId = x.PaymentMethodId.Value,
-                PaymentMethodName = x.PaymentMethod.PaymentMethodName,
+                AmountTypeId = x.AmountTypeId ?? 0,
+                AmountTypeName = x.AmountType != null ? x.AmountType.AmountTypeName : null,
+                PaymentMethodId = x.PaymentMethodId ?? 0,
+                PaymentMethodName = x.PaymentMethod != null ? x.PaymentMethod.PaymentMethodName : null,
                 StartDate = x.StartDate,
                 EndDate = x.EndDate,
-                CategoryId = x.CategoryId.Value,
-                CategoryName = x.Category.CategoryName,
-                CategoryTypeId = x.CategoryTypeId.Value,
-                CategoryTypeName = x.CategoryType.CategoryTypeName,
-                ContractStatusId = x.ContractStatusId.Value,
-                StatusName = x.ContractStatus.ContractStatusName,
+                CategoryId = x.CategoryId ?? 0,
+                CategoryName = x.Category != null ? x.Category.CategoryName : null,
+                CategoryTypeId = x.CategoryTypeId ?? 0,
+                CategoryTypeName = x.CategoryType != null ? x.CategoryType.CategoryTypeName : null,
+                ContractStatusId = x.ContractStatusId ?? 0,
+                StatusName = x.ContractStatus != null ? x.ContractStatus.ContractStatusName : null,
                 GuaranteeName = x.Guarantee != null ? x.Guarantee.GuaranteeName : null
             }).ToList();
+      
 
             return new SuccessDataResult<List<ContractListDto>>(result);
         }
@@ -125,5 +126,44 @@ namespace Business.Concrate
 
             return new SuccessDataResult<int>(contract.ContractId, "Müqavilə əlavə olundu.");
         }
+
+      
+        public IDataResult<ContractDetailsDto?> GetDetailsById(int contractId)
+        {
+            var result = _contractDal.GetContractDetailsById(contractId);
+            if (result == null)
+                return new ErrorDataResult<ContractDetailsDto?>("Müaqavilə tapılmadı");
+            return new SuccessDataResult<ContractDetailsDto?>(result);
+        }
+
+        public IResult Update(ContractUpdateDto dto)
+        {
+            var contract = _contractDal.Get(c => c.ContractId == dto.ContractId);
+            if (contract == null)
+                return new ErrorResult("Müqavilə tapılmadı");
+
+            contract.ContractNumber = dto.ContractNumber;
+            contract.ContractYear = dto.ContractYear;
+            contract.TaxNumber = dto.TaxNumber;
+            contract.OrganizationId = dto.OrganizationId;
+            contract.Subject = dto.Subject;
+            contract.Amount = dto.Amount;
+            contract.AmountTypeId = dto.AmountTypeId;
+            contract.PaymentMethodId = dto.PaymentMethodId;
+            contract.StartDate = dto.StartDate;
+            contract.EndDate = dto.EndDate;
+            contract.CategoryId = dto.CategoryId;
+            contract.CategoryTypeId = dto.CategoryTypeId;
+            contract.ContractStatusId = dto.ContractStatusId;
+            contract.GuaranteeId = dto.GuaranteeId;
+            contract.Fine = dto.Fine;
+            contract.Notes = dto.Notes;
+
+            _contractDal.Update(contract);
+
+            return new SuccessResult("Müqavilə uğurla yeniləndi.");
+        }
+
+
     }
 }

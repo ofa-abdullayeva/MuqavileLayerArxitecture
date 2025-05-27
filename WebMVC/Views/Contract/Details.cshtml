@@ -1,0 +1,28 @@
+﻿@model Entities.DTOs.ContractDTOs.ContractDetailsDto
+
+@{
+    ViewData["Title"] = "Müqavilə Məlumatları";
+}
+
+<h2 class="mb-4">Müqavilə Məlumatları</h2>
+
+<table class="table table-bordered">
+    <tr><th>Müqavilə Nömrəsi</th><td>@Model.ContractNumber</td></tr>
+    <tr><th>Müqavilə İli</th><td>@Model.ContractYear</td></tr>
+    <tr><th>VÖEN</th><td>@Model.TaxNumber</td></tr>
+    <tr><th>Təşkilat</th><td>@Model.OrganizationName</td></tr>
+    <tr><th>Mövzu</th><td>@Model.Subject</td></tr>
+    <tr><th>Məbləğ</th><td>@Model.Amount</td></tr>
+    <tr><th>Məbləğ Tipi</th><td>@Model.AmountTypeName</td></tr>
+    <tr><th>Ödəniş Üsulu</th><td>@Model.PaymentMethodName</td></tr>
+    <tr><th>Başlama Tarixi</th><td>@Model.StartDate?.ToShortDateString()</td></tr>
+    <tr><th>Bitmə Tarixi</th><td>@Model.EndDate?.ToShortDateString()</td></tr>
+    <tr><th>Kateqoriya</th><td>@Model.CategoryName</td></tr>
+    <tr><th>Alt Kateqoriya</th><td>@Model.CategoryTypeName</td></tr>
+    <tr><th>Status</th><td>@Model.ContractStatusName</td></tr>
+    <tr><th>Zəmanət</th><td>@Model.GuaranteeName</td></tr>
+    <tr><th>Cərimə</th><td>@Model.Fine</td></tr>
+    <tr><th>Qeyd</th><td>@Model.Notes</td></tr>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Geri</a>

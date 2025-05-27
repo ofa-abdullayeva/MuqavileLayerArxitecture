@@ -43,8 +43,8 @@ namespace Entities.DTOs.ContractDTOs
         public string? Notes { get; set; }
 
         // Əgər əlavə etmək istəsək, ContactPersons və AttachFiles-lar da buraya əlavə edilə bilər.
-        public List<string>? ContactPersonsOrg { get; set; } = new();
-        public List<string>? ContactPersonsSec { get; set; } = new();
-        public List<string>? AttachFileNames { get; set; } = new();
+        //public List<string>? ContactPersonsOrg { get; set; } = new();
+        //public List<string>? ContactPersonsSec { get; set; } = new();
+        //public List<string>? AttachFileNames { get; set; } = new();
     }
 }

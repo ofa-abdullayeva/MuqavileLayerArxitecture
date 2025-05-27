@@ -44,6 +44,17 @@ namespace WebMVC.Controllers
             _guaranteeService = guaranteeService;
         }
 
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var result = _contractService.GetDetailsById(id);
+            if (!result.Success || result.Data == null)
+            {
+                return NotFound(result.Message);
+            }
+
+            return View(result.Data); // Views/Contract/Details.cshtml faylına yönləndir
+        }
 
 
         // 🟦 GET: Müqavilə siyahısı
@@ -62,6 +73,42 @@ namespace WebMVC.Controllers
             FillViewBags();
             return View(); // Views/Contract/Create.cshtml olmalıdır
         }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var result = _contractService.GetDetailsById(id);
+            if (!result.Success || result.Data == null)
+                return NotFound();
+
+            FillViewBags();
+
+            var viewModel = _mapper.Map<ContractUpdateViewModel>(result.Data);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ContractUpdateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                FillViewBags();
+                return View(model);
+            }
+
+            var dto = _mapper.Map<ContractUpdateDto>(model);
+            var result = _contractService.Update(dto);
+
+            if (!result.Success)
+            {
+                TempData["Error"] = result.Message;
+                FillViewBags();
+                return View(model);
+            }
+
+            TempData["Success"] = "Müqavilə uğurla yeniləndi.";
+            return RedirectToAction("Index");
+        }
+
 
 
 
