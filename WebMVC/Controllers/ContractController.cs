@@ -55,61 +55,34 @@ namespace WebMVC.Controllers
             return View(list);
         }
 
-        //// 🟩 POST: Yeni müqavilə əlavə etmək
-        //[HttpPost]
-        //public IActionResult Create(ContractCreateViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        FillViewBags(); // səhv olduqda ViewBag-ləri yenidən doldur
-        //        return View(model);
-        //    }
+     
+        [HttpGet]
+        public IActionResult Create()
+        {
+            FillViewBags();
+            return View(); // Views/Contract/Create.cshtml olmalıdır
+        }
 
-        //    // ViewModel → DTO mapping
-        //    var dto = new ContractCreateDto
-        //    {
-        //        ContractNumber = model.ContractNumber,
-        //        ContractYear = model.ContractYear,
-        //        TaxNumber = model.TaxNumber,
-        //        OrganizationId = model.OrganizationId,
-        //        Subject = model.Subject,
-        //        Amount = model.Amount,
-        //        AmountTypeId = model.AmountTypeId,
-        //        PaymentMethodId = model.PaymentMethodId,
-        //        StartDate = model.StartDate,
-        //        EndDate = model.EndDate,
-        //        CategoryId = model.CategoryId,
-        //        CategoryTypeId = model.CategoryTypeId,
-        //        ContractStatusId = model.ContractStatusId,
-        //        GuaranteeId = model.GuaranteeId,
-        //        Fine = model.Fine,
-        //        Notes = model.Notes,
-        //        SelectedOrgContactPersonIds = model.SelectedOrgContactPersonIds,
-        //        SelectedSecContactPersonIds = model.SelectedSecContactPersonIds,
-        //        IsDimRelated = model.IsDimRelated
-        //    };
 
-        //    var result = _contractService.Add(dto);
-
-        //    // Burada fayl yükləmə və əlaqəli şəxsləri əlavə etmək olacaq (növbəti addım)
-
-        //    return RedirectToAction("Index");
-        //}
 
         [HttpPost]
         public IActionResult Create(ContractCreateViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                FillViewBags();
-                return View(model);
-            }
+            Console.WriteLine("FORM GÖNDƏRİLDİ!"); // <-- buranı görürsə işləyir
+            //if (!ModelState.IsValid)
+            //{ 
+            //    // Amma bu ife dusur. Ifin icinde de return var deye returndan sonra diger kodlar hec vaxt islemir.
+            //    // Invalid olmasina sebeb sende ContrctCreateViewmodel organizationId kimi deyerler null gelir. Bu da invalid deyer sayilir
+            //    FillViewBags();
+            //    return View(model);
+            //}
 
             // MAPPER istifadə et
             var dto = _mapper.Map<ContractCreateDto>(model);
 
-            var result = _contractService.Add(dto);
+            var result = _contractService.Add(dto); //Sende melumlatlari elave edilmesi ucun bu method gorulmelidi
 
+            TempData["Success"] = "Müqavilə uğurla əlavə edildi.";
             return RedirectToAction("Index");
         }
 

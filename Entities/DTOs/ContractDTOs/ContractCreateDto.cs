@@ -1,14 +1,15 @@
-﻿ //using Microsoft.AspNetCore.Http;
-    using System;
+﻿//using Microsoft.AspNetCore.Http;
+using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+using static Azure.Core.HttpHeader;
 
 
 namespace Entities.DTOs.ContractDTOs
     {
         public class ContractCreateDto
         {
-            [Required]
+           
             public string ContractNumber { get; set; }
 
             [Required]
@@ -42,26 +43,28 @@ namespace Entities.DTOs.ContractDTOs
             public string? Fine { get; set; }
 
             public string? Notes { get; set; }
+        
 
-            /// <summary>
-            /// Təşkilat üzrə əlaqələndirici şəxslərin ID-ləri
-            /// </summary>
-            public List<int>? SelectedOrgContactPersonIds { get; set; }
 
-            /// <summary>
-            /// İcra üzrə əlaqələndirici şəxslərin ID-ləri
-            /// </summary>
-            public List<int>? SelectedSecContactPersonIds { get; set; }
+            ///// <summary>
+            ///// Təşkilat üzrə əlaqələndirici şəxslərin ID-ləri
+            ///// </summary>
+            //public List<int>? SelectedOrgContactPersonIds { get; set; }
 
-            /// <summary>
-            /// Dövlət İmtahan Mərkəzi ilə əlaqəlidirmi?
-            /// </summary>
-            public bool IsDimRelated { get; set; }
+        ///// <summary>
+        ///// İcra üzrə əlaqələndirici şəxslərin ID-ləri
+        ///// </summary>
+        //public List<int>? SelectedSecContactPersonIds { get; set; }
 
-            /// <summary>
-            /// Yüklənən sənədlər (PDF, DOCX və s.)
-            /// </summary>
-     
+        ///// <summary>
+        ///// Dövlət İmtahan Mərkəzi ilə əlaqəlidirmi?
+        ///// </summary>
+        //public bool IsDimRelated { get; set; }
+
+        ///// <summary>
+        ///// Yüklənən sənədlər (PDF, DOCX və s.)
+        ///// </summary>
+
         }
     }
 

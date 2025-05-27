@@ -11,6 +11,8 @@ namespace WebMVC.AutoMapper
         {
             // Contract üçün
             CreateMap<Contract, ContractCreateDto>();
+            CreateMap<ContractCreateViewModel, ContractCreateDto>();
+
             CreateMap<ContractCreateDto, ContractCreateViewModel>();
             CreateMap<Contract, ContractDetailsDto>().ReverseMap();
             CreateMap<Contract, ContractCreateDto>().ReverseMap();

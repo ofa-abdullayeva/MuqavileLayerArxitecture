@@ -1,8 +1,7 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Entities.Concrate;
 using Business.Abstract;
-
+using Entities.DTOs.ContractDTOs;
 
 namespace WebAPI.Controllers
 {
@@ -10,54 +9,41 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ContractsController : ControllerBase
     {
-        IContractService _contractService;
+        private readonly IContractService _contractService;
 
         public ContractsController(IContractService contractService)
         {
             _contractService = contractService;
         }
 
-
-        //public ContractsController(IContractService contractService)
-        //{
-        //    _contractService = contractService;
-        //}
-
-        //[HttpGet]
-        //public IActionResult GetAll()
-        //{
-        //    var contracts = _contractService.GetAll();
-        //    return Ok(contracts);
-        //}
-
-        //[HttpGet("{id}")]
-        //public IActionResult GetById(int id)
-        //{
-        //    var contract = _contractService.GetById(id);
-        //    if (contract == null)
-        //        return NotFound();
-        //    return Ok(contract);
+        // 🟢 POST: api/contracts
+        [HttpPost]
+        public IActionResult Add([FromBody] ContractCreateDto dto)
+        {
+            var result = _contractService.Add(dto);
+            if (result.Success)
+                return Ok(result);
+            return BadRequest(result.Message);
         }
 
-        //[HttpPost]
-        //public IActionResult Add([FromBody] Contract contract)
-        //{
-        //    _contractService.Add(contract);
-        //    return Ok();
-        //}
+        // 🟢 GET: api/contracts
+        [HttpGet]
+        public IActionResult GetList()
+        {
+            var result = _contractService.GetContractList();
+            if (result.Success)
+                return Ok(result);
+            return BadRequest(result.Message);
+        }
 
-        //[HttpPut]
-        //public IActionResult Update([FromBody] Contract contract)
-        //{
-        //    _contractService.Update(contract);
-        //    return Ok();
-        //}
+        // 🟢 GET: api/contracts/{id}
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            // Əgər ContractDetailsDto əlavə etmisənsə istifadə edə bilərsən.
+            return Ok(); // implement et
+        }
 
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(int id)
-        //{
-        //    _contractService.Delete(id);
-        //    return Ok();
-        //}
-    
+        // Əlavə olaraq PUT və DELETE lazım olarsa aşağıda əlavə et.
+    }
 }
