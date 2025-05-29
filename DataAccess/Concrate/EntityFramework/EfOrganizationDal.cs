@@ -23,7 +23,7 @@ namespace DataAccess.Concrate.EntityFramework
                         OrganizationId = o.OrganizationId,
                         OrganizationName = o.OrganizationName,
                         TaxNumber = o.TaxNumber,
-                        // Əgər Organization cədvəldə əlavə sahələr varsa, buraya əlavə edə bilərsən.
+                        
                     })
                     .ToList();
             }
@@ -37,7 +37,7 @@ namespace DataAccess.Concrate.EntityFramework
                 if (existing != null)
                 {
                     context.Entry(existing).CurrentValues.SetValues(entity);
-                    context.SaveChanges(); // Ən önəmli hissə
+                    context.SaveChanges(); 
                 }
             }
         }
