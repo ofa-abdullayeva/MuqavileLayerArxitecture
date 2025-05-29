@@ -17,11 +17,11 @@ namespace Entities.DTOs.OrganizationDTOs
         public string? City { get; set; }
         public string? StreetAptNo { get; set; }
 
-        // Əlavə olaraq organizationa aid müqavilələri də gətirmək istəyirsənsə:
+
         public List<ContractMiniDto>? Contracts { get; set; }
     }
 
-    // Nested DTO (yalnız lazım olan müqavilə məlumatlarını göstərə bilərsən)
+
     public class ContractMiniDto
     {
         public int ContractId { get; set; }

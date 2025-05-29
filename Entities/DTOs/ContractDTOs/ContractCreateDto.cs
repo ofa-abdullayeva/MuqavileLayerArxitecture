@@ -12,7 +12,7 @@ namespace Entities.DTOs.ContractDTOs
            
             public string ContractNumber { get; set; }
 
-            [Required]
+        
             public string ContractYear { get; set; }
 
             public string? TaxNumber { get; set; }
@@ -45,25 +45,6 @@ namespace Entities.DTOs.ContractDTOs
             public string? Notes { get; set; }
         
 
-
-            ///// <summary>
-            ///// Təşkilat üzrə əlaqələndirici şəxslərin ID-ləri
-            ///// </summary>
-            //public List<int>? SelectedOrgContactPersonIds { get; set; }
-
-        ///// <summary>
-        ///// İcra üzrə əlaqələndirici şəxslərin ID-ləri
-        ///// </summary>
-        //public List<int>? SelectedSecContactPersonIds { get; set; }
-
-        ///// <summary>
-        ///// Dövlət İmtahan Mərkəzi ilə əlaqəlidirmi?
-        ///// </summary>
-        //public bool IsDimRelated { get; set; }
-
-        ///// <summary>
-        ///// Yüklənən sənədlər (PDF, DOCX və s.)
-        ///// </summary>
 
         }
     }

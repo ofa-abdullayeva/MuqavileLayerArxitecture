@@ -20,14 +20,14 @@ namespace Entities.DTOs.ContractDTOs
         public string? TaxNumber { get; set; }
 
         public int? OrganizationId { get; set; }
-        public string? OrganizationName { get; set; }  // əlaqəli təşkilatın adı
+        public string? OrganizationName { get; set; }  
 
         public string? Subject { get; set; }
 
         public decimal? Amount { get; set; }
 
         public int? AmountTypeId { get; set; }
-        public string? AmountTypeName { get; set; }  // Valyuta növü
+        public string? AmountTypeName { get; set; } 
 
         public int? PaymentMethodId { get; set; }
         public string? PaymentMethodName { get; set; }
@@ -52,7 +52,7 @@ namespace Entities.DTOs.ContractDTOs
 
         public string? Notes { get; set; }
 
-        // Lazımdırsa, əlavə əlaqəli kolleksiyaları belə əlavə edə bilərsən:
+      
         public List<ContractPersonDto>? ContactPersonsOrg { get; set; }
         public List<ContractPersonDto>? ContactPersonsSec { get; set; }
         public List<ContractAttachFileDto>? AttachFiles { get; set; }

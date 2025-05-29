@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using Core.Utilities.Results;
+using Business.Abstract;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrate;
@@ -119,7 +120,7 @@ namespace Business.Concrate
                 GuaranteeId = dto.GuaranteeId,
                 Fine = dto.Fine,
                 Notes = dto.Notes
-                // Əgər əlavə əlaqəli cədvəllər varsa (şəxslər, fayllar və s.), sonra əlavə ediləcək
+              
             };
 
             _contractDal.Add(contract);
@@ -163,6 +164,17 @@ namespace Business.Concrate
 
             return new SuccessResult("Müqavilə uğurla yeniləndi.");
         }
+
+        public IResult Delete(int contractId)
+        {
+            var contract = _contractDal.Get(c => c.ContractId == contractId);
+            if (contract == null)
+                return new ErrorResult("Müqavilə tapılmadı.");
+
+            _contractDal.Delete(contract);
+            return new SuccessResult("Müqavilə uğurla silindi.");
+        }
+
 
 
     }

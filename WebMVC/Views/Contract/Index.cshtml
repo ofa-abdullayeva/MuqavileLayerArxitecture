@@ -18,12 +18,12 @@
 </style>
 <form method="get" class="row g-3 mb-4">
 
-    <!-- Müqavilə ili -->
+  
     <div class="col-md-4">
         <input type="text" name="contractYear" class="form-control" placeholder="Müqavilə ili" value="@Context.Request.Query["contractYear"]" />
     </div>
 
-    <!-- Təşkilat (2-ci və 3-cü sütunu əhatə edir) -->
+  
     <div class="col-md-8">
         <select name="organizationId" class="form-select">
             <option value="">-- Təşkilat seçin --</option>
@@ -36,12 +36,12 @@
         </select>
     </div>
 
-    <!-- Müqavilə nömrəsi -->
+  
     <div class="col-md-4">
         <input type="text" name="contractNumber" class="form-control" placeholder="Müqavilə №" value="@Context.Request.Query["contractNumber"]" />
     </div>
 
-    <!-- Kateqoriya -->
+    
     <div class="col-md-4">
         <select name="categoryId" class="form-select">
             <option value="">-- Kateqoriya --</option>
@@ -54,7 +54,7 @@
         </select>
     </div>
 
-    <!-- Status (3-cü sütunun 2-ci yeri) -->
+   
     <div class="col-md-4">
         <select name="contractStatusId" class="form-select">
             <option value="">-- Status --</option>
@@ -67,12 +67,12 @@
         </select>
     </div>
 
-    <!-- VÖEN -->
+
     <div class="col-md-4">
         <input type="text" name="taxNumber" class="form-control" placeholder="VÖEN" value="@Context.Request.Query["taxNumber"]" />
     </div>
 
-    <!-- Alt kateqoriya -->
+    
     <div class="col-md-4">
         <select name="categoryTypeId" class="form-select">
             <option value="">-- Alt kateqoriya --</option>
@@ -85,7 +85,7 @@
         </select>
     </div>
 
-    <!-- Ödəniş növü -->
+   
     <div class="col-md-4">
         <select name="paymentMethodId" class="form-select">
             <option value="">-- Ödəniş növü --</option>
@@ -98,17 +98,17 @@
         </select>
     </div>
 
-    <!-- Minimum məbləğ -->
+
     <div class="col-md-4">
         <input type="number" name="amountMin" class="form-control" step="0.01" placeholder="Min məbləğ" value="@Context.Request.Query["amountMin"]" />
     </div>
 
-    <!-- Maksimum məbləğ -->
+   
     <div class="col-md-4">
         <input type="number" name="amountMax" class="form-control" step="0.01" placeholder="Max məbləğ" value="@Context.Request.Query["amountMax"]" />
     </div>
 
-    <!-- Valyuta növü -->
+  
     <div class="col-md-4">
         <select name="amountTypeId" class="form-select">
             <option value="">-- Valyuta seçin --</option>
@@ -121,12 +121,12 @@
         </select>
     </div>
 
-    <!-- Predmet (1-ci sütunun 5-ci sətirini və 2-ci sütunun 5-ci sətirini əhatə edir, yəni 8 sütunu tutur) -->
+
     <div class="col-md-8">
         <input type="text" name="subject" class="form-control" placeholder="Predmet" value="@Context.Request.Query["subject"]" />
     </div>
 
-    <!-- İcra təminatı -->
+
     <div class="col-md-4">
         <select name="guaranteeId" class="form-select">
             <option value="">-- İcra təminatı --</option>
@@ -139,7 +139,7 @@
         </select>
     </div>
 
-    <!-- Axtar / Sıfırla düymələri -->
+
     <div class="col-md-12 d-flex justify-content-end gap-2 mt-2">
         <button type="submit" class="btn btn-primary">Axtar</button>
         <a href="/Contract" class="btn btn-secondary">Sıfırla</a>
@@ -207,11 +207,17 @@
                                     Redaktə
                                 </a>
 
-                                <!-- Sil -->
+                               @*  <!-- Sil -->
                                 <a href="/Contract/Delete/@item.ContractId" class="btn btn-sm btn-outline-danger text-center" title="Sil" style="width: 80px;" onclick="return confirm('Müqaviləni silmək istədiyinizə əminsiniz?');">
                                     <i class="bi bi-trash fa-lg mb-1"></i><br />
                                     Sil
-                                </a>
+                                </a> *@
+                                <form asp-action="Delete" asp-route-id="@item.ContractId" method="post" style="display:inline;" onsubmit="return confirm('Müqaviləni silmək istədiyinizə əminsiniz?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger text-center" title="Sil" style="width: 80px;">
+                                        <i class="bi bi-trash fa-lg mb-1"></i><br />
+                                        Sil
+                                    </button>
+                                </form>
                             </div>
                         </td>
 

@@ -133,6 +133,19 @@ namespace WebMVC.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var result = _contractService.Delete(id);
+            if (result.Success)
+                TempData["Success"] = result.Message;
+            else
+                TempData["Error"] = result.Message;
+
+            return RedirectToAction("Index");
+        }
+
+
 
         // ✅ ViewBag-ləri dolduran ortaq metod
         private void FillViewBags()

@@ -28,7 +28,7 @@ namespace Business.Concrate
 
         public string CreateToken(User user)
         {
-            // Token creation logic here
+            
             return "token";
         }
     }

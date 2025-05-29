@@ -4,14 +4,6 @@
     ViewData["Title"] = "Təşkilatlar";
 }
 
-@* @if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">@TempData["Success"]</div>
-}
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger">@TempData["Error"]</div>
-} *@
 <style>
     .table td, .table th {
         vertical-align: middle;
@@ -41,9 +33,6 @@
         border-bottom: 7px solid #38466B;
     }
 
-    /* .table thead th {
-        border-bottom: 4px solid #38466B !important;
-    } */
 
 
     tbody tr:nth-child(even) {
@@ -211,7 +200,7 @@
             </text>
         }
 
-            // Təsdiqləmə üçün SweetAlert - Silmə
+
             function confirmDelete(id, name) {
                 Swal.fire({
                     title: 'Əminsiniz?',

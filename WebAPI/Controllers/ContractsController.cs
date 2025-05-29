@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
             _contractService = contractService;
         }
 
-        // 🟢 POST: api/contracts
+        
         [HttpPost]
         public IActionResult Add([FromBody] ContractCreateDto dto)
         {
@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
-        // 🟢 GET: api/contracts
+        
         [HttpGet]
         public IActionResult GetList()
         {
@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
-        // 🟢 GET: api/contracts/{id}
+      
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -56,6 +56,16 @@ namespace WebAPI.Controllers
                 return Ok(result);
             return BadRequest(result.Message);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var result = _contractService.Delete(id);
+            if (result.Success)
+                return Ok(result);
+            return BadRequest(result.Message);
+        }
+
 
 
     }

@@ -12,12 +12,12 @@ namespace DataAccess.Abstract
     public interface IContractDal : IEntityRepository<Contract>
     {
         List<ContractDetailsDto> GetContractDetails();
-        ContractDetailsDto? GetContractDetailsById(int contractId); // <-- yeni method
+        ContractDetailsDto? GetContractDetailsById(int contractId); 
 
         List<ContractListDto> GetContractList();
 
         IQueryable<Contract> GetQueryableContracts();
 
-        //Contract? GetContractWithDetails(int contractId);
+        
     }
 }

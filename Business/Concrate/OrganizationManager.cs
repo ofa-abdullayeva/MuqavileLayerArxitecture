@@ -73,18 +73,7 @@ namespace Business.Concrate
             }
         }
 
-        //public IDataResult<List<OrganizationGetDto>> GetAll()
-        //{
-        //    var data = _organizationDal.GetAll()
-        //        .Select(o => new OrganizationGetDto
-        //        {
-        //            OrganizationId = o.OrganizationId,
-        //            OrganizationName = o.OrganizationName,
-        //            TaxNumber = o.TaxNumber
-        //        }).ToList();
 
-        //    return new SuccessDataResult<List<OrganizationGetDto>>(data, Messages.OrganizationListed);
-        //}
        
 
         public IDataResult<Organization> GetById(int id)

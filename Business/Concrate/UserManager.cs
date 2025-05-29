@@ -20,18 +20,7 @@ namespace Business.Concrate
             _userDal = userDal;
         }
 
-        //public IDataResult<User> Login(string userName, string password)
-        //{
-        //    var user = _userDal.Get(u => u.UserName == userName && u.Password == password);
-        //    if (user != null)
-        //    {
-        //        return new SuccessDataResult<User>(user, "Giriş uğurludur.");
-        //    }
-        //    else
-        //    {
-        //        return new ErrorDataResult<User>("İstifadəçi adı və ya şifrə səhvdir.");
-        //    }
-        //}
+     
 
         public IDataResult<User> Login(string userName, string password)
         {
@@ -40,7 +29,7 @@ namespace Business.Concrate
             if (user == null)
                 return new ErrorDataResult<User>("İstifadəçi tapılmadı.");
 
-            // Parolu hash-lə və müqayisə et
+           
             string hashedPassword = PasswordHasher.Hash(password);
 
             if (user.Password != hashedPassword)

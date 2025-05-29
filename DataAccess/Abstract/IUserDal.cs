@@ -10,7 +10,7 @@ namespace DataAccess.Abstract
 {
     public interface IUserDal: IEntityRepository<User>
     {
-        //Task<bool>GetUserControl(string username, string password);
+       
         User GetByUsernameAndPassword(string username, string password);
     }
 }

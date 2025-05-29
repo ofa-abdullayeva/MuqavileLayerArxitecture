@@ -9,7 +9,7 @@ namespace WebMVC.AutoMapper
     {
         public MappingProfile()
         {
-            // Contract üçün
+            // Contract 
             CreateMap<Contract, ContractCreateDto>();
             CreateMap<ContractCreateViewModel, ContractCreateDto>();
 
@@ -18,13 +18,13 @@ namespace WebMVC.AutoMapper
             CreateMap<Contract, ContractCreateDto>().ReverseMap();
             CreateMap<Contract, ContractFilterDto>().ReverseMap();
             CreateMap<ContractFilterDto, Contract>().ReverseMap();
-            CreateMap<Contract, ContractMiniDto>();
+            //CreateMap<Contract, ContractMiniDto>();
 
             CreateMap<ContractDetailsDto, ContractUpdateViewModel>();
             CreateMap<ContractUpdateViewModel, ContractUpdateDto>();
 
 
-            // Organization üçün
+            // Organization 
             CreateMap<Organization, OrganizationGetDto>()
                 .ForMember(dest => dest.Contracts, opt => opt.MapFrom(src => src.Contracts));
 

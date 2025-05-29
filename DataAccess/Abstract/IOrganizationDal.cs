@@ -12,7 +12,7 @@ namespace DataAccess.Abstract
     public interface IOrganizationDal : IEntityRepository<Organization>
     {
 
-        // Add any additional methods specific to Organization data access here
+       
         List<OrganizationGetDto> GetOrganizationDetails();
     }
     

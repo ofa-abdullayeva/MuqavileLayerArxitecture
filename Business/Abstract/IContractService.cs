@@ -13,7 +13,7 @@ namespace Business.Abstract
     {
         IDataResult<List<ContractListDto>> GetContractList();
 
-        IDataResult<ContractDetailsDto?> GetDetailsById(int contractId); // <-- yeni method
+        IDataResult<ContractDetailsDto?> GetDetailsById(int contractId); 
 
 
         IDataResult<List<ContractListDto>> GetFilteredContracts(ContractFilterDto filter);
@@ -21,6 +21,7 @@ namespace Business.Abstract
         IDataResult<int> Add(ContractCreateDto dto);
 
         IResult Update(ContractUpdateDto dto);
+        IResult Delete(int contractId);
 
     }
 }

@@ -25,14 +25,15 @@ namespace WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddControllers();
-            services.AddControllersWithViews(); // Razor UI dəstəyi üçün
+            
+            services.AddControllersWithViews(); 
             services.AddRazorPages();
-            services.AddSession(); // Session dəstəyi üçün (əgər istifadə edəcəksənsə)
+            services.AddSession();
 
             services.AddDbContext<ContractContext>(options =>
     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            // Dependency Injection
+           
+
             services.AddScoped<IContractService, ContractManager>();
             services.AddScoped<IContractDal, EfContractDal>();
             services.AddScoped<IAmountTypeService, AmountTypeManager>();
@@ -56,12 +57,11 @@ namespace WebAPI
             services.AddScoped<IOrganizationDal, EfOrganizationDal>();
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IUserDal, EfUserDal>();
-            services.AddScoped<IAuthService, AuthManager>(); // JWT token servisi
+            services.AddScoped<IAuthService, AuthManager>(); 
 
-            // AutoMapper servisini əlavə et (profil avtomatik tapılır)
-            //services.AddAutoMapper(typeof(ContractProfile));
+            
 
-            // JWT Authentication ayarları
+            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -91,23 +91,22 @@ namespace WebAPI
                 app.UseSwaggerUI();
             }
 
-            app.UseStaticFiles(); // wwwroot fayllar üçün
+            app.UseStaticFiles(); 
             app.UseRouting();
 
-            app.UseAuthentication(); // <-- Əlavə edildi
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseSession(); // Session aktivləşdirilir
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllers();
-
+                
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Account}/{action=Login}/{id?}");
 
-                endpoints.MapRazorPages(); // Razor View-lər üçün lazım
+                endpoints.MapRazorPages();
             });
         }
     }

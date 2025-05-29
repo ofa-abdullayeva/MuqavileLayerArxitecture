@@ -84,7 +84,7 @@
             line-height: 1.6;
         }
 
-        /* Specific background colors */
+        
         .bg-entry { background-color: #e6ebf5; }
         .bg-search { background-color: #f0f2f7; }
         .bg-reports { background-color: #e7f5ed; }
@@ -102,49 +102,48 @@
 
     <div class="infobox-container">
 
-        <!-- Müqavilələrin Daxil Edilməsi -->
+        
         <a asp-controller="ContractsView" asp-action="Create" class="infobox bg-entry">
             <div class="icon"><i class="fa-solid fa-file-circle-plus"></i></div>
             <h2>Müqavilələrin Daxil Edilməsi</h2>
             <p>Müqavilə məlumatlarını və sənədləri sistemə əlavə etmək imkanı.</p>
         </a>
 
-        <!-- Axtarış və Baxış -->
+      
         <a asp-controller="ContractView" asp-action="Index" class="infobox bg-search">
             <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
             <h2>Axtarış və Baxış</h2>
             <p>Çoxsaylı filtr və meyarlarla müqavilələri asanlıqla tapın və izləyin.</p>
         </a>
 
-        <!-- Hesabatlar -->
+        
         <a asp-controller="ReportView" asp-action="Index" class="infobox bg-reports">
             <div class="icon"><i class="fa-solid fa-chart-column"></i></div>
             <h2>Hesabatlar</h2>
             <p>İllik, ümumi və kateqoriya üzrə maliyyə hesabatlarını əldə edin.</p>
         </a>
 
-        <!-- Təşkilat Məlumatları -->
+       
             <a asp-controller="Organization" asp-action="index" class="infobox bg-org ">
             <div class="icon"><i class="fa-solid fa-building"></i></div>
             <h2>Təşkilat Məlumatları</h2>
             <p>Təşkilatları idarə edin və əlaqədar müqavilələri izləyin.</p>
         </a>
 
-        <!-- Müddət Uzadılması -->
         <a asp-controller="ExtensionView" asp-action="Index" class="infobox bg-extend">
             <div class="icon"><i class="fa-solid fa-clock"></i></div>
             <h2>Müddət Uzadılması</h2>
             <p>Müqavilələrin müddətini sənədlərlə birlikdə uzadın və qeyd edin.</p>
         </a>
 
-        <!-- Əlavə Sənədlər -->
+        
         <a asp-controller="DocumentView" asp-action="Index" class="infobox bg-docs">
             <div class="icon"><i class="fa-solid fa-paperclip"></i></div>
             <h2>Əlavə Sənədlər</h2>
             <p>PDF və Word sənədləri əlavə edin və proqram daxilində baxın.</p>
         </a>
 
-            <!-- Ödəniş Qaimələri üzrə Axtarış -->
+           
             <a asp-controller="InvoiceView" asp-action="Index" class="infobox bg-search">
                 <div class="icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
                 <h2>Ödəniş Qaimələri üzrə Axtarış</h2>

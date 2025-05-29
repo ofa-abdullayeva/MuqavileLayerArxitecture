@@ -21,9 +21,9 @@ namespace WebAPI.Controllers
             var result = _userService.Login(UserForLoginDto.UserName, UserForLoginDto.Password);
             if (result.Success)
             {
-                return Ok(result.Data);  // Uğurlu login, istifadəçi məlumatları qaytarılır
+                return Ok(result.Data); 
             }
-            return BadRequest(result.Message);  // Xəta mesajı
+            return BadRequest(result.Message); 
         }
     }
    

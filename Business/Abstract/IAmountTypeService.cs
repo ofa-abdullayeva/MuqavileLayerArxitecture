@@ -11,13 +11,6 @@ namespace Business.Abstract
     public interface IAmountTypeService
     {
         IDataResult<List<AmountType>> GetAll();
-        //IDataResult<AmountTypeGetDto> GetById(int id);
-        //IDataResult<List<AmountTypeGetDto>> GetAmountTypeDetails();
-        //IResult Add(AmountType amountType);
-        //IResult Update(AmountType amountType); 
-        //IResult Delete(AmountType amountType); 
-
-        //IDataResult<AmountType> GetByName(string name);
-        //IDataResult<AmountType> GetByVoen(string voen);
+       
     }
 }

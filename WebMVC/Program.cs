@@ -8,7 +8,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Entities.Concrate;
 using AutoMapper;
-//using WebMVC.AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using WebMVC.AutoMapper;
 using System.Reflection;
@@ -17,10 +16,10 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Razor View, Session və Controller
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-builder.Services.AddSession(); // 💡 Login sonrası istifadəçi məlumatları üçün
+builder.Services.AddSession(); 
 
 // DbContext
 builder.Services.AddDbContext<ContractContext>(options =>
@@ -48,11 +47,7 @@ builder.Services.AddScoped<IGuaranteeDal, EfGuaranteeDal>();
 builder.Services.AddScoped<IUserService, UserManager>();
 builder.Services.AddScoped<IUserDal, EfUserDal>();
 
-// Optional: JWT varsa
-// builder.Services.AddAuthentication(...);
 
-//builder.Services.AddAutoMapper(typeof(MappingProfile));
-//builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 // App
@@ -68,12 +63,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-app.UseSession(); // 💡 Session mütləq burada aktiv edilməlidir
+app.UseSession(); 
 
-app.UseAuthentication(); // varsa
+app.UseAuthentication(); 
 app.UseAuthorization();
 
-// 💡 Default yönləndirmə → Login səhifəsinə
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Account}/{action=Login}/{id?}");
